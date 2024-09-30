@@ -3,6 +3,9 @@
 #include <algorithm> 
 #include <iterator>
 
+/**
+ * Template for customized display 
+ */
 template<typename T>
 std::ostream& operator << (std::ostream & s, 
    const std::vector<std::vector<T>>& triangle)
@@ -15,6 +18,11 @@ std::ostream& operator << (std::ostream & s,
     return s;
 }
 
+/**
+ * generate next vector<int> based on the input
+ * next row[idx] = previous row[idx] + previous row[idx+1]
+ * the next row[0] and next row[len(next row)-1] are all 1 
+ */
 auto get_next_row(const std::vector<int> & last_row)
 {
     std::vector<int> next_row{1};
@@ -30,6 +38,9 @@ auto get_next_row(const std::vector<int> & last_row)
     return next_row;
 }
 
+/**
+ * use move for efficiency, avoiding temperate variables copying 
+ */
 auto generate_triangle(int rows)
 {
     std::vector<std::vector<int>> triangle{ {1}};
@@ -40,7 +51,9 @@ auto generate_triangle(int rows)
     return triangle;
 }
 
-
+/**
+ * main function 
+ */
 auto main() -> int {
     auto triangle = generate_triangle(10); 
     std::cout<<triangle;
