@@ -2,6 +2,34 @@
 #include <vector> 
 #include <algorithm> 
 #include <iterator>
+#include <ranges>
+#include <numeric>
+#include <cassert>
+
+/**
+ * Add unit-test for triangle 
+ */
+void check_properties(
+    const std::vector<std::vector<int>>& triangle
+)
+{
+    size_t row_number = 1;
+    int expected_total = 1;
+    auto negative = [](int x){return x < 0;};
+    // check the row number, first and last element is 1 
+    // check the sum result match expectation
+    for (const auto & row : triangle)
+    {
+        assert(row.front() ==1);
+        assert(row.back() ==1);
+        assert(row.size() == row_number++);
+        assert(std::accumulate(row.begin(), row.end(), 0) == expected_total);
+        expected_total *= 2; 
+        auto negatives = row | std::views::filter(negative);
+        assert(negatives.empty());
+    }
+}
+
 
 /**
  * Template for customized display 
@@ -55,7 +83,9 @@ auto generate_triangle(int rows)
  * main function 
  */
 auto main() -> int {
-    auto triangle = generate_triangle(10); 
+    // row = 35 will cause int overflow 
+    auto triangle = generate_triangle(5);
+    check_properties(triangle);
     std::cout<<triangle;
     return 0 ;
 }
