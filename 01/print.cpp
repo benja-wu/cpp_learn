@@ -7,6 +7,17 @@
 #include <cassert>
 
 /**
+ * 
+ */
+bool is_palindrome(const std::vector<int>& v)
+{
+    auto l = v | std::views::take(v.size()/2);
+    auto r = v | std::views::reverse
+               | std::views::take(v.size()/2);
+    return std::ranges::equal(l, r);
+}
+
+/**
  * Add unit-test for triangle 
  */
 void check_properties(
@@ -27,6 +38,7 @@ void check_properties(
         expected_total *= 2; 
         auto negatives = row | std::views::filter(negative);
         assert(negatives.empty());
+        assert(is_palindrome(row) == true);
     }
 }
 
