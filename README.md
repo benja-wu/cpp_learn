@@ -19,13 +19,16 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 
 ```
 
-2. Install g++-11 to use c++20 std feature 
+2. Install g++-11/g++-13 to use c++20 std feature 
 ```bash
 sudo apt install g++-11
-
+or
+sudo apt install g++-13
 ```
 3. Compile and run with C++20 features
 
 ```bash
 g++-11 -std=c++2a -o a a.cpp
+or
+g++-13 -std=c++20 -o a a.cpp
 ```

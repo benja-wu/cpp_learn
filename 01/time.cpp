@@ -12,9 +12,8 @@ void duration_to_end_of_year()
     );
     auto event = std::chrono::sys_days ( new_years_eve);
     std::chrono::duration dur = event - now;
-    std::cout<<dur.count()<<" until event"<<std::endl;
-
-    // for support c++20 std::cout<<dur)<<" until event"<<std::endl;
+    //std::cout<<dur.count()<<" until event"<<std::endl;
+    std::cout<<dur<<" until event"<<std::endl;
 }
 
 int main()
